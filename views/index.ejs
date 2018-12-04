@@ -13,11 +13,21 @@
   <hr>
   <div class="mario-chat">
     <div class="chat-window" id="chat">
-      <div class="output" id="output">
-        <% messages.map(msg => { %>
-          <p><strong><%= msg.name %>: </strong><%= msg.message %></p>
-        <% }); %>
+      <% messages.map(msg => { %>
+      <div class="msg">
+          <div class="output" id="output">
+              
+                <strong><%= msg.name %>: </strong><%= msg.message %>
+                
+            </div>
+          <div class="time" id="time">
+              <%= msg.createdAt %>
+           
+          </div>
+          
       </div>
+      <% }); %>
+
       <div id="feedback"></div>
     </div>
     <input type="text" id="name" placeholder="Enter Your Name">

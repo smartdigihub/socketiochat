@@ -26,11 +26,16 @@ h2 {
   background-position: center;
   border: 1px solid #bbb;
 }
+.msg {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e9e9e9;
+}
 
-.output p{
+.output, .time {
   padding: 14px 0px;
   margin: 0 20px;
-  border-bottom: 1px solid #e9e9e9;
   color: #555;
 }
 

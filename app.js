@@ -1,4 +1,4 @@
-// Deploy to Heroku steps:
+// Deploy to git and Heroku steps:
 // 1. Make your port dynamic
 // 2. Mention start script of your application in package.json
 // 3. Create a database in mlab (localhost won't work)
@@ -11,7 +11,6 @@
 
 // 5. Create app in heroku: heroku create
 // 6. Deploy git repository to heroku: git push heroku
-
 
 const express = require('express');
 const app = express();
@@ -40,10 +39,16 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
   socket.on('chat', data => {
-    Chat.create({name: data.handle, message: data.message}).then(() => {
-      io.sockets.emit('chat', data); // return data
+    var date = new Date();
+    Chat.createdAt = date.toLocaleTimeString();
+    console.log(Chat.createdAt);
+
+    Chat.create({name: data.handle, message: data.message, createdAt: Chat.createdAt}).then((result) => {
+      console.log(result);
+      io.sockets.emit('chat', {name: result.name, message: result.message, createdAt: result.createdAt}); // return data
     }).catch(err => console.error(err));
   });
+
   socket.on('typing', data => {
     socket.broadcast.emit('typing', data); // return data
   });

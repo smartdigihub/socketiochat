@@ -1,6 +1,6 @@
 const socket = io.connect(location.href);
 
-  // dom
+// dom
 const message = document.querySelector('#message'),
       handle = document.querySelector('#name'),
       btn = document.querySelector('#send'),
@@ -8,6 +8,7 @@ const message = document.querySelector('#message'),
       chat = document.querySelector('#chat'),
       feedback = document.querySelector('#feedback'),
       clean = document.querySelector('#clean');
+      time = document.querySelector('#time');
 
       // event
       btn.addEventListener('click', () => {
@@ -19,7 +20,7 @@ const message = document.querySelector('#message'),
             message: message.value,
             handle: handle.value
           });
-          
+
         } else {
           alert('All fields are required!');
         }
@@ -36,8 +37,11 @@ const message = document.querySelector('#message'),
       });
 
       socket.on('chat', data => {
+        console.log(data);
         output.innerHTML += `<p><strong>${data.handle}: </strong>${data.message}</p>`;
+        time.innerHTML += `<p><strong>${data.createdAt}</strong></p>`;
       });
+
       let timer = setTimeout(makeNoTypingState, 1000);
 
       socket.on('typing', data => {
