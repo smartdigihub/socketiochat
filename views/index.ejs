@@ -4,14 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>MyChat App</title>
+  <title>Whats{Chat}</title>
   <link rel="stylesheet" href="/public/main.css">
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-  <h2>WhatsChat</h2>
+  <h1><img src="/public/orange.png" alt="">Whats{Chat}</h1>
+  <hr>
+  <strong><div id="userstatus"></div></strong>
   <hr>
   <div class="mario-chat">
+      <div class="upload-btn-wrapper">
+          <button class="btn">Set Chat Background</button>
+          <input type='file' id='getval' name="background-image" onchange="readURL(event)"/>
+      </div>
     <div class="chat-window" id="chat">
       <% messages.map(msg => { %>
       <div class="msg">
@@ -21,7 +27,7 @@
                 
             </div>
           <div class="time" id="time">
-              <%= msg.createdAt %>
+              <b><%= msg.createdAt %></b>
            
           </div>
           
@@ -29,10 +35,10 @@
       <% }); %>
 
       <div id="feedback"></div>
+      
     </div>
     <input type="text" id="name" placeholder="Enter Your Name">
     <input type="text" id="message" placeholder="Enter a Message">
-    <input type='file' id='getval' name="background-image" onchange="readURL(event)"/>
     <button id="send">Send</button>
   </div>
   <script src="/public/main.js"></script>
